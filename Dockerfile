@@ -61,4 +61,7 @@ RUN sudo apt autoremove -y \
 CMD ["zsh"]
 
 # docker build -t my_env .
-# sudo docker run -it -p 127.0.0.1:8080:8080  my_env
+
+# -v ${PWD}:~/CPP-WTFSC 将当前主机目录（${PWD}）与容器内的 ~/CPP-WTFSC 目录进行挂载
+# -w /home/zhuziyi/CPP-WTFSC 容器会在指定的工作目录中启动，并且后续执行的命令会在这个工作目录下执行
+# sudo docker run -it -p 127.0.0.1:8080:8080 -v ${PWD}:/home/zhuziyi/CPP-WTFSC -w /home/zhuziyi/CPP-WTFSC my_env 
