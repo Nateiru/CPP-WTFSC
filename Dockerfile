@@ -48,7 +48,8 @@ RUN sudo apt -y update && \
       g++-12
 
 # Install zsh
-RUN sudo apt install -y git zsh \
+RUN sudo apt -y update && \
+    sudo apt -y install git zsh \
     && git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh \
     && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc \
     && sudo usermod -s /bin/zsh zhuziyi
@@ -58,10 +59,13 @@ RUN sudo apt autoremove -y \
     && sudo apt clean -y \
     && sudo rm -rf /var/lib/apt/lists/*
 
+# 终端切换为 zsh
 CMD ["zsh"]
 
-# docker build -t my_env .
+# how to use Dockerfile 
 
+# docker build -t my_env .
+# . 会在当前目录寻找 Dockerfile文件运行
 # -v ${PWD}:~/CPP-WTFSC 将当前主机目录（${PWD}）与容器内的 ~/CPP-WTFSC 目录进行挂载
 # -w /home/zhuziyi/CPP-WTFSC 容器会在指定的工作目录中启动，并且后续执行的命令会在这个工作目录下执行
 # --name 自定义名称
