@@ -1,6 +1,9 @@
 # CPP-WTFSC
 Write The Friendly Source Code In CPP！
 
+# RTFSC
+- [15-445/645 C++ Bootcamp](https://github.com/cmu-db/15445-bootcamp)
+
 # RUN
 ```shell
 cd CPP-WTFSC
