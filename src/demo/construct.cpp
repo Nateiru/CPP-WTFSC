@@ -10,10 +10,13 @@ public:
     std::cout << "Pair(int, int)" << std::endl;
   }
 
+  // 如果没有 && 那么对于 non-const rvalue reference 
+  // 也会被下面函数捕获，由于是 const 并不能实现所有权转移
   Pair(const Pair &rhs) : x(rhs.x), y(rhs.y) {
     std::cout << "Pair(const Pair &)" << std::endl;
   }
 
+  // 为了移动不能是 const 
   Pair(Pair &&rhs) {
     x = std::move(rhs.x);
     y = std::move(rhs.y);
@@ -42,6 +45,9 @@ int main() {
   Pair p2{1, 2};     // 调用带参数的构造函数
   Pair p3(p2);              // 调用复制构造函数，使用默认生成的实现
   Pair p4(std::move(p3)); // 调用移动构造函数，使用默认生成的实现
+
+  Pair p5 = Pair(-1, -2);
+  // Pair p6{std::move(Pair())};
   std::cout << "=========== deconstruct ===========" << std::endl;
   return 0;
 }

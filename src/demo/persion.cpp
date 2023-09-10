@@ -10,7 +10,7 @@ public:
     std::cout << "拷贝构造函数" << std::endl;
   }
 
-  Person(const Person&& person) {
+  Person(Person&& person) {
     name_ = person.name_;
     std::cout << "移动构造函数"<< std::endl;
   }
