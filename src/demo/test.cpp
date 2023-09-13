@@ -1,15 +1,40 @@
-#include <memory>
 #include <iostream>
+#include <vector>
 
-class A {
+class Widget {
 public:
-  A(int a_) : a(a_), ptr(std::make_unique<int> (a)) {}
-  int a;
-  std::unique_ptr<int> ptr;
+  Widget() = default;
+
+  Widget(const std::vector<int> &vec, const std::string &str) : vec(vec), str(str) {}
+
+  Widget(const Widget&) = default;
+
+  Widget& operator = (const Widget&) = default;
+
+  friend void Swap(Widget& a, Widget& b) {
+    std::swap(a.vec, b.vec);
+    std::swap(a.str, b.str);
+  }
+
+  Widget(Widget &&rhs) {
+    Swap(*this, rhs);
+  }
+
+  Widget& operator = (Widget &&rhs) {
+    Swap(*this, rhs);
+    return *this;
+  }
+
+private:
+  std::vector<int> vec;
+  std::string str;
 };
 
 int main() {
-  int x = 1;
-  A a(x);
-  std::cout << *(a.ptr) << std::endl;
+
+  std::vector<int> vec {1, 2, 3, 4, 5};
+  std::string str("zhuziyi");
+
+  Widget w1(vec, str);
+  Widget w2(std::move(w1));
 }
