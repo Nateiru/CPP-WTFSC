@@ -130,7 +130,7 @@ public:
     return head_node ? head_node->v : nullptr;
   }
 
-  bool empty() {
+  bool empty() const {
     std::lock_guard<std::mutex> l(head_mutex_);
     return head_.get() == get_tail();
   }
@@ -178,7 +178,7 @@ private:
 
   std::unique_ptr<Node> head_;
   Node *tail_{nullptr};
-  std::mutex head_mutex_;
+  mutable std::mutex head_mutex_;
   std::mutex tail_mutex_;
   std::condition_variable cv_;
 };
