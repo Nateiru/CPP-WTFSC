@@ -33,7 +33,7 @@ public:
     if ((t + 1) % Cap == head.load(std::memory_order_acquire)) // (1)
       return false;
 
-    allocator<T>::construct(data + t, std::forward<Args>(args)...);
+    std::allocator<T>::construct(data + t, std::forward<Args>(args)...);
     // (2)  synchronizes-with (3)
     tail.store((t + 1) % Cap, std::memory_order_release); // (2)
     return true;
