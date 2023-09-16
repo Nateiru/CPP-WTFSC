@@ -15,7 +15,7 @@ class Queue {
 public:
   Queue() = default;
   Queue(Queue&&) = default;
-  Queue& operator=(Queue&&) = delete; 
+  Queue& operator=(Queue&&) = default; 
   
   Queue(const Queue&) = delete;
   Queue& operator=(const Queue&) = delete; 
@@ -50,7 +50,8 @@ private:
     T v;
     std::unique_ptr<Node> next;
   };
-
+  // head 可能和 tail 指向同一位置
+  // 因此 tail 必须是 raw pointer
   std::unique_ptr<Node> head_;
   Node *tail_{nullptr};
 };
@@ -64,7 +65,7 @@ class DummyQueue {
 public:
   DummyQueue() : head_(new Node), tail_(head_.get()) {}
   DummyQueue(DummyQueue&&) = default;
-  DummyQueue& operator=(DummyQueue&&) = delete; 
+  DummyQueue& operator=(DummyQueue&&) = default; 
   
   DummyQueue(const DummyQueue&) = delete;
   DummyQueue& operator=(const DummyQueue&) = delete; 
@@ -106,7 +107,7 @@ class ConcurrentQueue {
 public:
   ConcurrentQueue() : head_(new Node), tail_(head_.get()) {}
   ConcurrentQueue(ConcurrentQueue&&) = default;
-  ConcurrentQueue& operator=(ConcurrentQueue&&) = delete; 
+  ConcurrentQueue& operator=(ConcurrentQueue&&) = default; 
   
   ConcurrentQueue(const ConcurrentQueue&) = delete;
   ConcurrentQueue& operator=(const ConcurrentQueue&) = delete; 
