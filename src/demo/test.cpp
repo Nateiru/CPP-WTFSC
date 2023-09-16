@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <memory>
+#include <cstring>
 
 class Widget {
 public:
@@ -32,9 +34,18 @@ private:
 
 int main() {
 
-  std::vector<int> vec {1, 2, 3, 4, 5};
-  std::string str("zhuziyi");
+  // int matrix [10000][10000];
+  int** matrix = new int*[100000];
+  for (int i = 0; i < 100000; i++) {
+      matrix[i] = new int[100000];
+  }
 
-  Widget w1(vec, str);
-  Widget w2(std::move(w1));
+
+  // 记得在不再需要矩阵时释放内存
+  for (int i = 0; i < 100000; i++) {
+      delete[] matrix[i];
+  }
+  delete[] matrix;
+
+  return 0;
 }

@@ -5,5 +5,3 @@ add_executable(construct construct.cpp)
 add_executable(person persion.cpp)
 
 add_executable(lfu lfu.cpp)
-
-add_executable(spsc spsc.cpp)
