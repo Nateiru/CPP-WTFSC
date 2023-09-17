@@ -54,7 +54,7 @@ public:
 };
 
 int main() {
-  spsc<int, 10> q;
+  spsc<int, 4> q;
   q.push(1);
   q.push(2);
   q.push(3);

@@ -57,9 +57,11 @@ public:
 
 int main() {
   spsc<int> q{3};
-  q.push(1);
-  q.push(2);
-  q.push(3);
+  std::cout << "=========================== push ===========================" << std::endl;
+  std::cout << q.push(1) << std::endl;;
+  std::cout << q.push(2) << std::endl;;
+  std::cout << q.push(3) << std::endl;;
+  std::cout << "=========================== pop ===========================" << std::endl;
 
   {
     int x;

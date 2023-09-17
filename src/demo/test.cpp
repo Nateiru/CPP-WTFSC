@@ -32,20 +32,33 @@ private:
   std::string str;
 };
 
+// 使用模板不定长参数来保存数据
+template<int ...Args>
+struct List;
+
+// 特化一个Null来表示结尾
+using Null = List<>;
+
+// 特化链表的结构
+template<int head, int ...Args>
+struct List<head, Args...> {
+    static constexpr int value = head;
+    using next = List<Args...>;
+};
+
+template<int head>
+struct List<head> {
+    static constexpr int value = head;
+    using next = Null;
+};
+
+
+
 int main() {
 
-  // int matrix [10000][10000];
-  int** matrix = new int*[100000];
-  for (int i = 0; i < 100000; i++) {
-      matrix[i] = new int[100000];
-  }
-
-
-  // 记得在不再需要矩阵时释放内存
-  for (int i = 0; i < 100000; i++) {
-      delete[] matrix[i];
-  }
-  delete[] matrix;
-
+  using list = List<1, 1, 4, 5, 1, 4>;
+  std::cout << list::value << std::endl;
+  std::cout << list::next::value << std::endl;
+  std::cout << list::next::next::value << std::endl;
   return 0;
 }
