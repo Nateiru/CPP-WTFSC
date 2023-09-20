@@ -1,8 +1,8 @@
 #ifndef ENV_POSIX_H
 #define ENV_POSIX_H
 
-#include <fcntl.h>
-#include <cstddef>
+#include <fcntl.h>  // O_CLOEXEC
+#include <cstddef>  // size_t
 
 #include "slice.h"
 #include "status.h"
@@ -19,9 +19,10 @@ constexpr const size_t BUFFER_SIZE = 65536;
 class WritableFile {
  public:
   WritableFile() = default;
+  virtual ~WritableFile();
+
   WritableFile(const WritableFile&) = delete;
   WritableFile& operator=(const WritableFile&) = delete;
-  virtual ~WritableFile();
 
   virtual Status Append(const Slice& data) = 0;
   virtual Status Close() = 0;

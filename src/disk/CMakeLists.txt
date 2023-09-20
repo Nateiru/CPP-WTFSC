@@ -1,3 +1,2 @@
-add_subdirectory(bustdb)
-
+add_subdirectory(bustub)
 add_subdirectory(leveldb)

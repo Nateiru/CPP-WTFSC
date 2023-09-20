@@ -1,12 +1,4 @@
-
-#include <sys/stat.h>
-#include <dirent.h>
-#include <fcntl.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <unistd.h>
+#include <unistd.h> // write
 
 #include "slice.h"
 #include "status.h"
