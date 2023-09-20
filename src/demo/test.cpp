@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <cstring>
+#include <functional>
 
 class Widget {
 public:
@@ -52,13 +53,64 @@ struct List<head> {
     using next = Null;
 };
 
+template <typename T> void foo(T t) { std::cout << t << std::endl; }
+// primary template
+template <int N>  // non-type parameter N
+struct binary {
+  // an template instantiation inside the template itself, which contructs a recursion
+  static constexpr int value = binary<N / 10>::value << 1 | N % 10;
+};
+// full specialization when N == 0
+template <> struct binary<0> {
+  static constexpr int value = 0;
+};
+
+struct Base {
+  using type = Base;
+};
+
+struct Derive : public Base {
+  type B;
+};
+
+template <typename T>
+struct rank : std::integral_constant<std::size_t, 0> {};                          // #1
+
+template <typename T>
+struct rank<T[]> : std::integral_constant<std::size_t, rank<T>::value + 1> {};    // #2
+
+template <typename T, std::size_t N>
+struct rank<T[N]> : std::integral_constant<std::size_t, rank<T>::value + 1> { };  // #3
+
+template <typename T>
+using rank_t = typename rank<T>::value_type;
+
+template <typename T>
+inline constexpr rank_t<T> rank_v = rank<T>::value;
 
 
+
+void f() {
+}
+#include <typeinfo>
 int main() {
 
   using list = List<1, 1, 4, 5, 1, 4>;
-  std::cout << list::value << std::endl;
-  std::cout << list::next::value << std::endl;
-  std::cout << list::next::next::value << std::endl;
+  // std::cout << list::value << std::endl;
+  // std::cout << list::next::value << std::endl;
+  // std::cout << list::next::next::value << std::endl;
+  std::cout << binary<101>::value << std::endl;    // instantiation
+  
+
+  std::cout << std::rank<int>::value << std::endl;           // 0
+  std::cout << std::rank<int[5]>::value << std::endl;        // 1
+  std::cout << std::rank<int[5][4]>::value << std::endl;     // 2
+  std::cout << std::rank<int[][5][6]>::value << std::endl;   // 3
+
+
+  const int a = 1;
+  int *ptr = (int *)&a;
+  *ptr = 2;
+  std::cout << "a: " << a << std::endl;
   return 0;
 }

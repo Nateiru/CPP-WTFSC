@@ -1,0 +1,1 @@
+add_executable(leveldb leveldb.cpp env_posix.cpp)
