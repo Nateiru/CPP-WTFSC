@@ -1,1 +1,1 @@
-add_executable(vector vector.cpp)
+add_executable(vector vector.cpp disk_manager.cpp)

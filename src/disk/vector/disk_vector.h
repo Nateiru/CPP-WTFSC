@@ -1,6 +1,7 @@
 #ifndef DISK_VECTOR_H
 #define DISK_VECTOR_H
 
+#include <cstdint>    // int32_t
 #include <fstream>    // std::fstream
 #include <cstddef>    // size_t
 #include <cstring>    // memset
@@ -9,7 +10,7 @@
 
 namespace Tiny {
 static char buffer[4096];
-using block_id_t = size_t;
+using block_id_t = int32_t;
 
 template<typename T>
 class DiskVector {
