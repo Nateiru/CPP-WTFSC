@@ -19,7 +19,7 @@ constexpr const size_t BUFFER_SIZE = 65536;
 class WritableFile {
  public:
   WritableFile() = default;
-  virtual ~WritableFile();
+  virtual ~WritableFile() = default;
 
   WritableFile(const WritableFile&) = delete;
   WritableFile& operator=(const WritableFile&) = delete;
