@@ -93,6 +93,14 @@ inline constexpr rank_t<T> rank_v = rank<T>::value;
 void f() {
 }
 #include <typeinfo>
+
+class Test {
+public:
+  void print() {
+    std::cout << "Hello World" << std::endl;
+  }
+};
+
 int main() {
 
   using list = List<1, 1, 4, 5, 1, 4>;
@@ -112,5 +120,8 @@ int main() {
   int *ptr = (int *)&a;
   *ptr = 2;
   std::cout << "a: " << a << std::endl;
+  
+  Test *nptr = static_cast<Test *>(nullptr);
+  nptr->print();
   return 0;
 }
