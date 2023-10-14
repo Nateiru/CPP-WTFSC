@@ -85,7 +85,6 @@ class ConcurrentList {
 };
 
 int main() {
-
   ConcurrentList<int> list;
   list.push_front(1);
   list.push_front(2);
@@ -94,5 +93,5 @@ int main() {
   list.for_each([](int x) -> void {
     std::cout << x << std::endl;
   });
-
+  return 0;
 }

@@ -40,4 +40,4 @@ public:
 
 }
 
-#endif
+#endif // #define __SPARSEMATRIX_EXCEPTIONS_H__
