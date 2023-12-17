@@ -8,9 +8,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)     # Require C++20 support.
 # generate complie_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# 设置【可执行文件】和【动态库】的输出位置 
+# executable file output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# static library output directory
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+# shared library output directory
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 add_subdirectory(contrib)
 add_subdirectory(src)
